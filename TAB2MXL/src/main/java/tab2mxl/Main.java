@@ -2,6 +2,7 @@ package tab2mxl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Main {
 	
@@ -9,8 +10,7 @@ public class Main {
 	 * Given a string s containing just the characters,
 	 * '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 	 */
-	
-	public boolean isValid(String s) {
+	public static boolean isValid(String s) {
 		Stack<Character> stack = new Stack<>();
 		for (int i = 0; i < s.length(); i++) {
 			if (s.charAt(i) == '(') stack.push(s.charAt(i));
@@ -43,6 +43,6 @@ public class Main {
 			System.out.println("Member name: ");
 			System.out.println(e);
 		}
-		public boolean isValid("((]]([}}{");
+		System.out.println(isValid("((]]([}}{"));
 	}
 }
