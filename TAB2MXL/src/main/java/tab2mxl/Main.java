@@ -32,6 +32,25 @@ public class Main {
 		return stack.empty();
 	}
 	
+	/**
+	 * Given an array nums and a value val, 
+	 * remove all instances of that value in-place and return the new length.
+	 * @param nums
+	 * @param val
+	 * @return
+	 */
+	
+	public static int removeElement(int[] nums, int val) {
+        int length = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {
+                nums[length] = nums[i];
+                length++;
+            }
+        }
+        return length;
+    }
+	
 	public static void main(String[] args) {
 		List<String> list = new ArrayList<>();
 		list.add("Rafael Dolores");
@@ -44,5 +63,7 @@ public class Main {
 			System.out.println(e);
 		}
 		System.out.println(isValid("((]]([}}{"));
+		int[] arr = {1, 2, 3, 4, 5};
+		System.out.println(removeElement(arr, 2));
 	}
 }
