@@ -56,8 +56,8 @@ public class Main {
 		list.add("Rafael Dolores");
 		list.add("Mohammed Fulwala");
 		list.add("Nick Park");
-		list.add("Shawn I forgot your last name, sorry");
-		list.add("Yashraj I forgot your last name, sorry");
+		list.add("Shawn Verma");
+		list.add("Yashraj Rathore");
 		for (String e: list) { 
 			System.out.println("Member name: ");
 			System.out.println(e);
