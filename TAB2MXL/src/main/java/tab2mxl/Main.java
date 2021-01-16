@@ -66,4 +66,8 @@ public class Main {
 		int[] arr = {1, 2, 3, 4, 5};
 		System.out.println(removeElement(arr, 2));
 	}
+	
+	protected void confirmWorking() { 
+		System.out.println("pull this shit");
+	}
 }
