@@ -69,6 +69,6 @@ public class Main {
 	}
 	
 	protected void confirmWorking() { 
-		System.out.println("pull this shit");
+		System.out.println("pull this method, bro");
 	}
 }
