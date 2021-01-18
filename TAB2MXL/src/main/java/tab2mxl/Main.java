@@ -3,7 +3,6 @@ package tab2mxl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import java.io.*;
 
 public class Main {
 	
