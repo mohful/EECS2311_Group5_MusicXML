@@ -6,6 +6,9 @@ import java.util.Stack;
 
 public class Main {
 	
+	protected void check() { 
+		System.out.println("Hi");
+	}
 	/**
 	 * Given a string s containing just the characters,
 	 * '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
