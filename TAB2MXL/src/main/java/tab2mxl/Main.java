@@ -9,6 +9,7 @@ public class Main {
 		System.out.println("Hi professo");
 		System.out.println("Yeah Hai");
 		System.out.println("Rafael");
+		System.out.println("Mohammed");
 	}
 	protected void check2() { 
 		System.out.println("Test");
