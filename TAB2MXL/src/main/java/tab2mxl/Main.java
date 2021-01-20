@@ -9,6 +9,10 @@ public class Main {
 		System.out.println("Hi professo");
 		System.out.println("Yeah Hai");
 	}
+	protected void check2() { 
+		System.out.println("Test");
+		System.out.println("Yeah Hai");
+	}
 	
 	public static void main(String[] args) {
 		List<String> list = new ArrayList<>();
