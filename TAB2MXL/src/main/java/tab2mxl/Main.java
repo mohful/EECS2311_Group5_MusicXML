@@ -2,8 +2,10 @@ package tab2mxl;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application{
 	
 	protected void check() { 
 		System.out.println("Hi professo");
@@ -36,5 +38,12 @@ public class Main {
 	
 	protected void confirmWorking() { 
 		System.out.println("Hi");
+	}
+
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
