@@ -8,6 +8,7 @@ public class Main {
 	
 	protected void check() { 
 		System.out.println("Hi professo");
+		System.out.println("Yeah Hai");
 	}
 	/**
 	 * Given a string s containing just the characters,
