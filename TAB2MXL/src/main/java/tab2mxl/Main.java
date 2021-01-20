@@ -10,6 +10,7 @@ public class Main {
 		System.out.println("Yeah Hai");
 		System.out.println("Rafael");
 		System.out.println("Mohammed");
+		System.out.println("Junhyeong");
 	}
 	protected void check2() { 
 		System.out.println("Test");
