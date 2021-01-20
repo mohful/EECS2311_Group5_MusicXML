@@ -8,6 +8,7 @@ public class Main {
 	protected void check() { 
 		System.out.println("Hi professo");
 		System.out.println("Yeah Hai");
+		System.out.println("Rafael");
 	}
 	protected void check2() { 
 		System.out.println("Test");
