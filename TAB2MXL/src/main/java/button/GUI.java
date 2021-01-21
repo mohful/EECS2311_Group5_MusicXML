@@ -63,7 +63,7 @@ public class GUI extends Application {
         // DropDown menu construction
        dropDownMenu.getItems().addAll("Guitar", "Drum", "Bass");
        dropDownMenu.setValue("Instrument of Choice");
-       inputValues.add(dropDownMenu, 2, 5);
+       
         
         
         
@@ -76,46 +76,63 @@ public class GUI extends Application {
         obl.setFont(font1);
         ol.setFont(font1);
         
-        ob.setOnAction( // 
-        	new EventHandler<ActionEvent>() {
+        ob.setOnAction( //Sets the value of the button on Action.
+
+        	new EventHandler<ActionEvent>() { //Interface for handling events
         		
         		
         @Override
+        /**
+         * Invoked when 'browse' button is clicked...searching of files begins
+         * @param ActionEvent is the event associated when the browse button was clicked.
+         */
         public void handle(final ActionEvent e) {
         	
-        File fi = fc.showOpenDialog(primaryStage);
+        File fi = fc.showOpenDialog(primaryStage); //Pops up an "Open File" file chooser dialog
         if (fi != null) {
         	
-        	openFile(fi);
+        	openFile(fi); //opens the selected file 
         	
         	}
         
-        }
+        else { // display error message if file doesn't exist
+        	
+        	final Label notification = new Label();
+        	notification.setText("You have not selected a textFile");
+        	
+        		}
         
-        }); //This opens fc when the button ob is pushed
+        	}
         
+        }); 
+        
+        //Restricts the allowable columns and rows for the location of each text or button
         GridPane.setConstraints(ob, 1, 2);
         GridPane.setConstraints(obl, 0, 2);
         GridPane.setConstraints(el, 0, 1);
         GridPane.setConstraints(ol, 0, 0);
-        inputValues.setHgap(6);
-        inputValues.setVgap(6);
-        inputValues.getChildren().addAll(ob, ol, el, obl);
         
-        rg.getChildren().addAll(inputValues);
+        inputValues.setHgap(6); //The width of the horizontal gaps between columns.
+        inputValues.setVgap(6); //The length of the vertical gaps between rows
+        inputValues.getChildren().addAll(ob, ol, el, obl); 
+        inputValues.add(dropDownMenu, 2, 5);  //adds the drop-down menu 
+        
+        rg.getChildren().addAll(inputValues); //method from superclass 'Pane', this gets all the children and places them in the GUI
         rg.setPadding(new Insets(12, 12, 12, 12));
         
-        Scene Scene1 = new Scene(rg);
-        primaryStage.setScene(Scene1);
-        primaryStage.show();
+        //create a scene for the primary page
+        Scene Scene1 = new Scene(rg); 
+        primaryStage.setScene(Scene1); 
+        primaryStage.show(); //make the primary page visible to the user
     }
     
     /**
 	 * The method that opens fc and takes a input file
+	 * @param fi is the file to be opened
 	 */
     private void openFile(File fi) {
     	try {
-            dt.open(fi);
+            dt.open(fi); 
         } catch (IOException ex) {
             Logger.getLogger(
                 GUI.class.getName()).log(
