@@ -3,6 +3,8 @@ package tab2mxl;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -34,6 +36,7 @@ public class Main extends Application{
 			System.out.println("Member name: ");
 			System.out.println(e);
 		}
+		Application.launch(args);
 	}
 	
 	protected void confirmWorking() { 
@@ -43,8 +46,13 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception  { 
+		primaryStage.setTitle("TexttoTab");
 		
-		// TODO Auto-generated method stub
+		Label label = new Label("TexttoTab is a desktop application that converts txt based tablature into readable format");
+		Scene scene = new Scene(label, 400, 200);
+		primaryStage.setScene(scene);
+		
+		primaryStage.show();
 		
 	}
 }
