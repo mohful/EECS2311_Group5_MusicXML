@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -28,25 +29,46 @@ import javafx.stage.Stage;
 public class GUI extends Application {
 
 	private Desktop dt = Desktop.getDesktop(); //User Desktop
+	
+	 final Button ob = new Button();
+	 final FileChooser fc = new FileChooser();
+	 final Label ol = new Label();
+	 final Label obl = new Label();
+	 final Label el = new Label();
+	 final ComboBox dropDownMenu = new ComboBox();
 
 	/**
 	 * Overridden start method that originally came from the Application class from Javafx. 
-	 * This method is the body structure of the GUI.
+	 * This method constructs the body structure of the GUI.
+	 * @param primaryStage is the primary page of this application, onto which the application scene can be set.
+	 * <p> more stages can be created if the developers choose so!
 	 */
     @Override
     public void start(Stage primaryStage) {
     	
     	primaryStage.setTitle("TTT(TextToTablature)"); //Title
 
-        final Button ob = new Button("Browse"); //Push button that is redirected to a file selecting page
-        final FileChooser fc = new FileChooser(); //Opens browser to select the txt file
-        final Label ol = new Label("TTT is a desktop application used for converting "
+    	Button ob = new Button("Browse"); //Push button that is redirected to a file selecting page
+        
+    	FileChooser fc = new FileChooser(); //Opens browser to select the txt file
+        Label ol = new Label("TTT is a desktop application used for converting "
         		+ "txt tablatures into formal tablatures."); //Description of the use of the desktop application
-        final Label obl = new Label("Please select the tablature in txt format: "); //Indicator on what the button is for
-        final Label el = new Label("");//Empty label
+        Label obl = new Label("Please select the tablature in txt format: "); //Indicator on what the button is for
+        Label el = new Label("");//Empty label
+        
+        //object that will do the "adding" of buttons in the GUI
         final GridPane inputValues = new GridPane(); //The parent which concludes of children such as buttons and labels
         final Pane rg = new VBox(12); //Base class that is used to have the children of inputValues public
         
+        // DropDown menu construction
+       dropDownMenu.getItems().addAll("Guitar", "Drum", "Bass");
+       dropDownMenu.setValue("Instrument of Choice");
+       inputValues.add(dropDownMenu, 2, 5);
+        
+        
+        
+        
+        //Text Customization
         Font font = Font.font("Browsed", FontWeight.EXTRA_BOLD, 40); //Font for the buttons
         Font font1 = Font.font("label font", FontWeight.NORMAL, 20); //Font for the plan texts
 
@@ -54,15 +76,22 @@ public class GUI extends Application {
         obl.setFont(font1);
         ol.setFont(font1);
         
-        ob.setOnAction(
+        ob.setOnAction( // 
         	new EventHandler<ActionEvent>() {
-        		@Override
-        		public void handle(final ActionEvent e) {
-        			File fi = fc.showOpenDialog(primaryStage);
-        			if (fi != null) {
-        				openFile(fi);
-        			}
-        		}
+        		
+        		
+        @Override
+        public void handle(final ActionEvent e) {
+        	
+        File fi = fc.showOpenDialog(primaryStage);
+        if (fi != null) {
+        	
+        	openFile(fi);
+        	
+        	}
+        
+        }
+        
         }); //This opens fc when the button ob is pushed
         
         GridPane.setConstraints(ob, 1, 2);
