@@ -1,136 +1,151 @@
-package tab2mxl;
+package button;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener; //Event Handler package  
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /*
- * Sample GUI class
+ * Javafx GUI class
  */
 
-public class GUI extends JFrame implements ActionListener{ //event handler interface for responsible for handling all action events such as when the user clicks on a component
+public class GUI extends Application {
+
+	private Desktop dt = Desktop.getDesktop(); //User Desktop
 	
-	private int count = 0;
-	private JButton button;
-	private JLabel label;
-	private JFrame frame; 
-	private JPanel panel;
-	private JComboBox dropDown;
-	private JTextField text;
-	
-	
+	 final Button ob = new Button();
+	 final FileChooser fc = new FileChooser();
+	 final Label ol = new Label();
+	 final Label obl = new Label();
+	 final Label el = new Label();
+	 final ComboBox dropDownMenu = new ComboBox();
+
 	/**
-	 * Default Constructor to make a default GUI
+	 * Overridden start method that originally came from the Application class from Javafx. 
+	 * This method constructs the body structure of the GUI.
+	 * @param primaryStage is the primary page of this application, onto which the application scene can be set.
+	 * <p> more stages can be created if the developers choose so!
 	 */
-	public GUI() { 
-		
-		//Technical Set-Up
-		frame = new JFrame(); //make the frame..window 
-		panel = new JPanel(); //creates the panel to store content inside the window
-		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30)); //static factory
-		panel.setLayout(new GridLayout(0,1));
-		frame.add(panel, BorderLayout.CENTER); // add panel to the frame
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //set what happens when they close the frame
-		frame.setTitle("MusicXML Converter 3000");
-		frame.setSize(500, 500);
-	    frame.setLocation(430, 100);
-		frame.pack(); //set the window to match a certain and size
-		frame.setVisible(true); //set the window to be visible and focused
-		
-		// Creating the buttons
-		createDropDown();
-		gimmeTextFile();
-		createConvertBox();
-		
-		
-	}
-	
-	/**
-	 * Generates a button that converts the file and pressing it 
-	 * leads to the conversion 
+    @Override
+    public void start(Stage primaryStage) {
+    	
+    	primaryStage.setTitle("TTT(TextToTablature)"); //Title
+
+    	Button ob = new Button("Browse"); //Push button that is redirected to a file selecting page
+        
+    	FileChooser fc = new FileChooser(); //Opens browser to select the txt file
+        Label ol = new Label("TTT is a desktop application used for converting "
+        		+ "txt tablatures into formal tablatures."); //Description of the use of the desktop application
+        Label obl = new Label("Please select the tablature in txt format: "); //Indicator on what the button is for
+        Label el = new Label("");//Empty label
+        
+        //object that will do the "adding" of buttons in the GUI
+        final GridPane inputValues = new GridPane(); //The parent which concludes of children such as buttons and labels
+        final Pane rg = new VBox(12); //Base class that is used to have the children of inputValues public
+        
+        // DropDown menu construction
+       dropDownMenu.getItems().addAll("Guitar", "Drum", "Bass");
+       dropDownMenu.setValue("Instrument of Choice");
+       
+        
+        
+        
+        
+        //Text Customization
+        Font font = Font.font("Browsed", FontWeight.EXTRA_BOLD, 40); //Font for the buttons
+        Font font1 = Font.font("label font", FontWeight.NORMAL, 20); //Font for the plan texts
+
+        ob.setFont(font);
+        obl.setFont(font1);
+        ol.setFont(font1);
+        
+        ob.setOnAction( //Sets the value of the button on Action.
+
+        	new EventHandler<ActionEvent>() { //Interface for handling events
+        		
+        		
+        @Override
+        /**
+         * Invoked when 'browse' button is clicked...searching of files begins
+         * @param ActionEvent is the event associated when the browse button was clicked.
+         */
+        public void handle(final ActionEvent e) {
+        	
+        File fi = fc.showOpenDialog(primaryStage); //Pops up an "Open File" file chooser dialog
+        if (fi != null) {
+        	
+        	openFile(fi); //opens the selected file 
+        	
+        	}
+        
+        else { // display error message if file doesn't exist
+        	
+        	final Label notification = new Label();
+        	notification.setText("You have not selected a textFile");
+        	
+        		}
+        
+        	}
+        
+        }); 
+        
+        //Restricts the allowable columns and rows for the location of each text or button
+        GridPane.setConstraints(ob, 1, 2);
+        GridPane.setConstraints(obl, 0, 2);
+        GridPane.setConstraints(el, 0, 1);
+        GridPane.setConstraints(ol, 0, 0);
+        
+        inputValues.setHgap(6); //The width of the horizontal gaps between columns.
+        inputValues.setVgap(6); //The length of the vertical gaps between rows
+        inputValues.getChildren().addAll(ob, ol, el, obl); 
+        inputValues.add(dropDownMenu, 2, 5);  //adds the drop-down menu 
+        
+        rg.getChildren().addAll(inputValues); //method from superclass 'Pane', this gets all the children and places them in the GUI
+        rg.setPadding(new Insets(12, 12, 12, 12));
+        
+        //create a scene for the primary page
+        Scene Scene1 = new Scene(rg); 
+        primaryStage.setScene(Scene1); 
+        primaryStage.show(); //make the primary page visible to the user
+    }
+    
+    /**
+	 * The method that opens fc and takes a input file
+	 * @param fi is the file to be opened
 	 */
-	private void createConvertBox() { 
-		button = new JButton("Convert File");
-	
-		button.addActionListener(this);
-		label = new JLabel("Number of Files Coverted: 0");
-		button.setBackground(Color.LIGHT_GRAY);
-		button.setVisible(true);
-		button.setSize(1,2);
-		button.setLocation(4,4);
-		
-		panel.add(button);
-		panel.add(label);
-		
-	}
-	
-	/**
-	 * Generates a drop down menu containing three choices
-	 * 
-	 */
-	private void createDropDown() { 
-		
-		//Instruction message
-		JLabel lbl = new JLabel("Select and click one of the instruments");
-		lbl.setVisible(true);
-		panel.add(lbl);
-		
-		//Drop Down Menu
-		String[] choices = {"Guitars", "Drums", "Bass"};
-		dropDown = new JComboBox(choices);
-		dropDown.setBackground(Color.white);
-		panel.add(dropDown);
-		
-	
-	}
-	
-	private void gimmeTextFile() { 
-		JLabel msg = new JLabel("Provide the tablature to be converted");
-		msg.setVisible(true);
-		panel.add(msg);
-		
-		text = new JTextField();
-		text.setVisible(true);
-		panel.add(text);
-		
-		
-	}
-	
-		
-	
-	
-	
-	public static void main(String[]args) { 
-		
-		new GUI();
-		
-	}
-	
-	
-	
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		count++;
-		label.setText("Number of Converted Files: " + count);
-		if (count % 15 == 0) {
-			label.setText("Number of Converted Files: " + count + " Files Converted! " );
-		}
-		
-		String choice = "";
-		
-		
-	}
-		
+    private void openFile(File fi) {
+    	try {
+            dt.open(fi); 
+        } catch (IOException ex) {
+            Logger.getLogger(
+                GUI.class.getName()).log(
+                    Level.SEVERE, null, ex
+                );
+        }
+    }
+    
+    /**
+     * Main function that runs the Application.launch() method
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }
